@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <?php
     // define variables and set to empty values
     $namaErr = $emailErr = $genderErr = $websiteErr = "";
@@ -63,8 +64,8 @@
 
     <p><span class="error">* Harus Diisi.</span></p>
 
-    <form method="post" action="<?php
-                                echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form method="post" action="validasi.php<?php
+                                            echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <table>
             <tr>
                 <td>Nama:</td>
@@ -101,10 +102,26 @@
                 </td>
             </tr>
             <td>
-                <input type="submit" name="submit" value="Submit">
+                <input type="submit" name="Submit" value="Submit">
             </td>
         </table>
     </form>
+    <?php
+    // Check If form submitted, insert form data into users table.
+    if (isset($_POST['Submit'])) {
+        $nama = $_POST['nama'];
+        $email = $_POST['email'];
+        $website = $_POST['website'];
+        $comment = $_POST['comment'];
+        $gender = $_POST['gender'];
+
+        // include database connection file
+        include_once("conn.php");
+        // Insert user data into table
+        $result = mysqli_query($koneksi, "INSERT INTO komen(nama,email,website,comment,gender) 
+        VALUES('$nama', '$email','$website','$comment','$gender')");
+    }
+    ?>
 
     <?php
     echo "<h2>Data yang anda isi:</h2>";
@@ -121,6 +138,10 @@
     echo "<br>";
 
     echo $gender;
+    echo "<br>";
+
+    // Show message when user added
+    echo "Data berhasil disimpan. <a href='index.php'>View Data</a>";
     ?>
 
 </body>
