@@ -120,6 +120,8 @@
         // Insert user data into table
         $result = mysqli_query($koneksi, "INSERT INTO komen(nama,email,website,comment,gender) 
         VALUES('$nama', '$email','$website','$comment','$gender')");
+        // Show message when user added
+        echo "Data berhasil disimpan. <a href='index.php'>View Data</a>";
     }
     ?>
 
@@ -140,8 +142,7 @@
     echo $gender;
     echo "<br>";
 
-    // Show message when user added
-    echo "Data berhasil disimpan. <a href='index.php'>View Data</a>";
+
     ?>
 
 </body>
